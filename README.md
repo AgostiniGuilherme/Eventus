@@ -23,7 +23,7 @@ Eventus é uma plataforma de gerenciamento de eventos desenvolvida como parte de
 
 Faça o clone do repositório do projeto em sua máquina local.
 ```bash
-   git clone https://github.com/AgostiniGuilherme/Eventus.git
+git clone https://github.com/AgostiniGuilherme/Eventus.git
    ```
 
 ## **3. Criar um Ambiente Virtual**
