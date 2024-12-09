@@ -122,6 +122,6 @@ Parabéns! O projeto está configurado e rodando em sua máquina. Agora você po
 
 ---
 
-© Projeto desenvolvido por Guilherme Noronha de Agostini e Gustavo Viana Avelar Dutra e para a disciplina Programação Web, realizada na UFLA - Universidade Federal de Lavras.
+© Projeto desenvolvido por Guilherme Noronha de Agostini e Gustavo Viana Avelar Dutra para a disciplina Programação Web, realizada na UFLA - Universidade Federal de Lavras.
 
 ---
