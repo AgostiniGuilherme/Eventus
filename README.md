@@ -49,10 +49,10 @@ Crie e ative um ambiente virtual para o projeto:
 
 ## **4. Instalar Dependências**
 
-Com o ambiente virtual ativado, instale as dependências do projeto listadas no arquivo `requirements.txt`:
+Com o ambiente virtual ativado, instale o Django:
 
 ```bash
-pip install -r requirements.txt
+pip install Django
 ```
 
 ---
