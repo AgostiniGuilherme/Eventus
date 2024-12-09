@@ -1,0 +1,22 @@
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block titulo %} 
+  Eventus - Eventos 
+{% endblock %} 
+
+{% block conteudo %}
+  <div class="mycard">
+    <h1>Eventos</h1>
+    <ul>
+      {% for evento in eventos %}
+      <li>
+          <strong>{{ evento.nome }}</strong><br>
+          <em>Local:</em> {{ evento.local }} | 
+          <em>Data:</em> {{ evento.data }} | 
+          <em>Descrição:</em> {{ evento.descricao }} 
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

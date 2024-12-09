@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block titulo %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'mystyles.css' %}">
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="/">PRINCIPAL</a> |
+            <a href="/eventos">EVENTOS</a> |
+            <a href="/meus-eventos">MEUS EVENTOS</a> |
+            <a href="/dashboard">DASHBOARD</a> |
+            <a href="/auth/login">LOGIN</a> |
+            <a href="/auth/cadastro">CADASTRE-SE</a>
+        </div>
+        {% block conteudo %}
+        {% endblock %}
+    </body>
+</html>
