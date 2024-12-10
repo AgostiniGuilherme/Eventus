@@ -95,31 +95,6 @@ http://127.0.0.1:8000/
 
 ---
 
-## **8. Configurar Variáveis de Ambiente (Opcional)**
-
-Se o projeto usa variáveis de ambiente, crie um arquivo `.env` na raiz do projeto e configure as chaves necessárias. Consulte o responsável pelo projeto para obter os valores corretos.
-
----
-
-## **9. Possíveis Erros e Soluções**
-
-### **Erro 1: `pip` não encontrado**
-- Certifique-se de que o Python e o Pip estão instalados corretamente e adicionados ao `PATH`.
-
-### **Erro 2: `ModuleNotFoundError`**
-- Certifique-se de que todas as dependências foram instaladas com:
-  ```bash
-  pip install -r requirements.txt
-  ```
-
-### **Erro 3: Problemas com Migrações**
-- Se houver problemas com o banco de dados, tente apagar o arquivo `db.sqlite3` (ou equivalente) e executar novamente:
-  ```bash
-  python manage.py migrate
-  ```
-
----
-
 ## **10. Finalização**
 
 Parabéns! O projeto está configurado e rodando em sua máquina. Agora você pode começar a utilizá-lo ou desenvolvê-lo.
