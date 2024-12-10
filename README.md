@@ -33,6 +33,7 @@ Crie e ative um ambiente virtual para o projeto:
 ### **No Windows**:
 1. Crie o ambiente virtual:
    ```bash
+   Set-ExecutionPolicy Unrestricted -Scope Process
    python -m venv venv
    ```
 
