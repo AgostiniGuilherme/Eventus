@@ -6,7 +6,7 @@ Este tutorial irá guiá-lo para configurar e executar o projeto em sua máquina
 
 ## **Visão Geral do Projeto**
 
-![BD Eventus](imagens/eventus.jpg)
+![BD Eventus](imagens/eventus.png)
 
 Eventus é uma plataforma de gerenciamento de eventos desenvolvida como parte de um projeto acadêmico para a disciplina de Programação Web da UFLA. O sistema permite a divulgação de eventos, o cadastro de usuários e a administração eficiente de eventos e participantes, oferecendo também um painel administrativo completo para facilitar o gerenciamento de toda a plataforma.
 
