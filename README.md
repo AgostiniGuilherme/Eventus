@@ -6,7 +6,7 @@ Este tutorial irá guiá-lo para configurar e executar o projeto em sua máquina
 
 ## **Visão Geral do Projeto**
 
-![BD Eventus](imagens/eventus.png)
+![BD Eventus](imagens/eventus.jpg)
 
 Eventus é uma plataforma de gerenciamento de eventos desenvolvida como parte de um projeto acadêmico para a disciplina de Programação Web da UFLA. O sistema permite a divulgação de eventos, o cadastro de usuários e a administração eficiente de eventos e participantes, oferecendo também um painel administrativo completo para facilitar o gerenciamento de toda a plataforma.
 
@@ -49,10 +49,10 @@ Crie e ative um ambiente virtual para o projeto:
 
 ## **4. Instalar Dependências**
 
-Com o ambiente virtual ativado, instale as dependências do projeto listadas no arquivo `requirements.txt`:
+Com o ambiente virtual ativado, instale o Django:
 
 ```bash
-pip install -r requirements.txt
+pip install Django
 ```
 
 ---
@@ -67,7 +67,7 @@ python manage.py migrate
 
 ---
 
-## **6. Criar um Superusuário (Opcional)**
+## **6. Criar um Superusuário**
 
 Se desejar acessar o painel administrativo do Django, crie um superusuário:
 
