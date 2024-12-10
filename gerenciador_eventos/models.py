@@ -17,7 +17,6 @@ class Participacao(models.Model):
   usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Relacionamento com o usuário
   evento = models.ForeignKey(Evento, related_name='participantes', on_delete=models.CASCADE)  # Relacionamento com o evento
   eh_organizador = models.BooleanField(default=False)  # Define se o usuário é o organizador do evento
-  confirmado = models.BooleanField(default=False)  # Indica se o participante confirmou presença
 
   def __str__(self):
     return f'{self.usuario.username} - {self.evento.titulo}'

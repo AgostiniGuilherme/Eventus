@@ -11,9 +11,8 @@ class EventoAdmin(admin.ModelAdmin):
 
 # Registra o modelo Participacao
 class ParticipacaoAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'evento', 'eh_organizador', 'confirmado')  # O que será exibido na lista de participações
+    list_display = ('usuario', 'evento', 'eh_organizador')  # O que será exibido na lista de participações
     search_fields = ('usuario__username', 'evento__titulo')  # Possibilita buscas pelo nome do usuário e evento
-    list_filter = ('eh_organizador', 'confirmado')  # Filtros para organizador e confirmação
     raw_id_fields = ('usuario', 'evento')  # Usar ID direto para campos de relacionamento
 
 # Registra os modelos no painel administrativo
