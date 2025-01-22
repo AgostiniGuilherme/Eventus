@@ -1,23 +1,45 @@
-{% load static %}
+{% extends "base.html" %} 
+{% load static %} 
 
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="{% static 'mystyles.css' %}"> 
-        <title>Eventus</title>
-    </head>
-    <body>
-        <div class="topnav">
-            <a href="/">PRINCIPAL</a> |
-            <a href="/eventos">EVENTOS</a> |
-            <a href="/meus-eventos">MEUS EVENTOS</a> |
-            <a href="/dashboard">DASHBOARD</a> |
-            <a href="/auth/login">LOGIN</a> |
-            <a href="/auth/cadastro">CADASTRE-SE</a>
+{% block titulo %} 
+  Eventus - Eventos 
+{% endblock %} 
+
+{% block conteudo %}
+  <div class="main">
+        <h1>Bem-vindo!</h1>
+    
+        {% if not user.is_authenticated %}
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card">
+                        <div class="card-header text-center bg-primary text-white">
+                            <h2>Login</h2>
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Usuário</label>
+                                    <input type="text" name="username" id="username" class="form-control" placeholder="Digite seu usuário" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Senha</label>
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="Digite sua senha" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="main">
-            <h1>Bem-vindo</h1>
+        {% else %}
+        <p class="text-center">Olá, <strong>{{ user.username }}</strong>! Você está logado.</p>
+        <div class="text-center">
+            <a href="/auth/logout/" class="btn btn-danger">Sair</a>
         </div>
-    </body>
-</html>
+        {% endif %}
+    </div>
+{% endblock %}
