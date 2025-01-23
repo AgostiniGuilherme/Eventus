@@ -9,4 +9,5 @@ urlpatterns = [
     path('meus-eventos/detalhes/<int:id>', views.evento_detalhes, name='evento_detalhes'),
     path('auth/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('auth/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('auth/cadastrar/', views.cadastrar, name='cadastrar'),
 ]

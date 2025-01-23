@@ -1,7 +1,9 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 def principal(request):
     template = loader.get_template('principal.html')
@@ -83,3 +85,14 @@ def evento_detalhes(request, id):
         'evento': evento,
     }
     return HttpResponse(template.render(context, request))
+
+def cadastrar(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Usuário cadastrado com sucesso! Faça login.')
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'cadastrar.html', {'form': form})
