@@ -92,7 +92,7 @@ def cadastrar(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Usuário cadastrado com sucesso! Faça login.')
-            return redirect('login')
+            return redirect('principal')
     else:
         form = UserCreationForm()
     return render(request, 'cadastrar.html', {'form': form})
