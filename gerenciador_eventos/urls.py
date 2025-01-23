@@ -7,6 +7,6 @@ urlpatterns = [
     path('eventos/', views.eventos, name='eventos'),
     path('meus-eventos/', views.meus_eventos, name='meus_eventos'),
     path('meus-eventos/detalhes/<int:id>', views.evento_detalhes, name='evento_detalhes'),
-    path('auth/login/', auth_views.LoginView.as_view(template_name='gerenciador_eventos/principal.html'), name='login'),
+    path('auth/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('auth/logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
