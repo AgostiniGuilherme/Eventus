@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ evento.titulo }}</title>
+</head>
+<body>
+    <h1>{{ evento.titulo }}</h1>
+    <p><strong>Descrição:</strong> {{ evento.descricao }}</p>
+    <p><strong>Local:</strong> {{ evento.local }}</p>
+    <p><strong>Data:</strong> {{ evento.data }}</p>
+    <p><strong>Organizador:</strong> {{ evento.organizador.username }}</p>
+
+    <a href="{% url 'atualizar_evento' evento.id %}">Editar</a>
+    <form method="POST" action="{% url 'deletar_evento' evento.id %}">
+        {% csrf_token %}
+        <button type="submit">Excluir</button>
+    </form>
+    <a href="{% url 'listar_eventos' %}">Voltar à lista de eventos</a>
+</body>
+</html>

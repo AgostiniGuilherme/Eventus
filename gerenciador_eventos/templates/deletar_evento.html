@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excluir Evento</title>
+</head>
+<body>
+    <h1>Excluir Evento</h1>
+    <p>Tem certeza de que deseja excluir o evento <strong>{{ evento.titulo }}</strong>?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Sim, excluir</button>
+    </form>
+    <a href="{% url 'detalhar_evento' evento.id %}">Cancelar</a>
+</body>
+</html>

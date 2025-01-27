@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from .models import Evento
+from .forms import EventoForm  # Certifique-se de ter um formulário para Evento
 
 def principal(request):
     template = loader.get_template('principal.html')
@@ -124,3 +126,54 @@ def logar(request):
 def custom_logout(request):
     logout(request)
     return redirect('principal')
+
+#CRUD
+#Create
+@login_required
+def criar_evento(request):
+    if request.method == 'POST':
+        form = EventoForm(request.POST)
+        if form.is_valid():
+            evento = form.save(commit=False)
+            evento.organizador = request.user  # Define o usuário logado como organizador
+            evento.save()
+            messages.success(request, 'Evento criado com sucesso!')
+            return redirect('meus_eventos')  # Redirecione para a lista de eventos do usuário
+    else:
+        form = EventoForm()
+    
+    return render(request, 'criar_evento.html', {'form': form})
+
+#Read
+def listar_eventos(request):
+    eventos = Evento.objects.all()
+    return render(request, 'listar_eventos.html', {'eventos': eventos})
+
+def detalhar_evento(request, id):
+    evento = get_object_or_404(Evento, id=id)
+    return render(request, 'detalhar_evento.html', {'evento': evento})
+
+#Update
+@login_required
+def atualizar_evento(request, id):
+    evento = get_object_or_404(Evento, id=id, organizador=request.user)
+    if request.method == 'POST':
+        form = EventoForm(request.POST, instance=evento)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Evento atualizado com sucesso!')
+            return redirect('detalhar_evento', id=evento.id)
+    else:
+        form = EventoForm(instance=evento)
+    
+    return render(request, 'atualizar_evento.html', {'form': form, 'evento': evento})
+
+#Delete
+@login_required
+def deletar_evento(request, id):
+    evento = get_object_or_404(Evento, id=id, organizador=request.user)
+    if request.method == 'POST':
+        evento.delete()
+        messages.success(request, 'Evento deletado com sucesso!')
+        return redirect('meus_eventos')  # Redirecione para a lista de eventos
+    return render(request, 'deletar_evento.html', {'evento': evento})
