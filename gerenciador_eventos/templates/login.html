@@ -38,7 +38,7 @@
         {% else %}
         <p class="text-center">Olá, <strong>{{ user.username }}</strong>! Você está logado.</p>
         <div class="text-center">
-            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+            <form action="{% url 'custom_logout' %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger">Sair</button>
             </form>            
