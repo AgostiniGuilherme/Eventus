@@ -13,7 +13,7 @@ urlpatterns = [
     path('eventos/<int:id>/', views.detalhar_evento, name='detalhar_evento'),
     path('eventos/<int:id>/editar/', views.editar_evento, name='editar_evento'),
     path('eventos/<int:id>/deletar/', views.deletar_evento, name='deletar_evento'),
-    path('evento/<int:evento_id>/inscrever/', views.inscricao_em_evento, name='inscricao_em_evento'),
-    path('evento/<int:evento_id>/cancelar-inscricao/', views.cancelar_inscricao, name='cancelar_inscricao'),
+    path('evento/<int:id>/inscrever/', views.inscricao_em_evento, name='inscricao_em_evento'),
+    path('evento/<int:id>/cancelar-inscricao/', views.cancelar_inscricao, name='cancelar_inscricao'),
     #path('evento/<int:evento_id>/inscritos/', views.listar_inscritos, name='listar_inscritos')
 ]

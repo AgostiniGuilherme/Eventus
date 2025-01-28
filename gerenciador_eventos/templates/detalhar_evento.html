@@ -44,12 +44,11 @@
     <div class="mt-4 d-flex justify-content-between">
       <a href="{% url 'editar_evento' evento.id %}" class="btn btn-warning">Editar</a>
 
-      {% if request.user not in evento.participantes.all %}
+      {% if not usuario_inscrito %}
       <a href="{% url 'inscricao_em_evento' evento.id %}" class="btn btn-success">Inscrever-se</a>
-      {% else %}
-      <!-- Se o usuário já estiver inscrito, exibe o botão para desinscrição -->
+    {% else %}
       <a href="{% url 'cancelar_inscricao' evento.id %}" class="btn btn-danger">Desinscrever-se</a>
-      {% endif %}
+    {% endif %}
 
       <form method="POST" action="{% url 'deletar_evento' evento.id %}" style="display:inline;">
         {% csrf_token %}

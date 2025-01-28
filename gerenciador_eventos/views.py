@@ -71,7 +71,7 @@ def criar_evento(request):
 
             # Adiciona automaticamente o organizador como participante
             Participacao.objects.create(usuario=request.user, evento=evento, eh_organizador=True)
-            
+
             messages.success(request, 'Evento criado com sucesso!')
             return redirect('meus_eventos') 
     else:
@@ -86,7 +86,8 @@ def listar_eventos(request):
 
 def detalhar_evento(request, id):
     evento = get_object_or_404(Evento, id=id)
-    return render(request, 'detalhar_evento.html', {'evento': evento})
+    usuario_inscrito = evento.participantes.filter(usuario=request.user).exists()
+    return render(request, 'detalhar_evento.html', {'evento': evento, 'usuario_inscrito': usuario_inscrito})
 
 #Update
 @login_required
@@ -114,23 +115,17 @@ def deletar_evento(request, id):
     return render(request, 'deletar_evento.html', {'evento': evento})
 
 @login_required
-def inscricao_em_evento(request, evento_id):
-    evento = get_object_or_404(Evento, id=evento_id)
+def inscricao_em_evento(request, id):
+    evento = get_object_or_404(Evento, id=id)
 
-    if not Participacao.objects.filter(evento=evento, usuario=request.user).exists():
-        # Se o usuário já estiver inscrito, não permita a inscrição
-        messages.info(request, 'Você já está inscrito neste evento.')
-        return redirect('detalhar_evento', id=evento.id)
-
-    Participacao.objects.create(evento=evento, usuario=request.user)
-    messages.success(request, 'Você se inscreveu com sucesso no evento!')
+    Participacao.objects.create(usuario=request.user, evento=evento, eh_organizador=False)
+    messages.success(request, 'Você foi inscrito no evento com sucesso!')
     return redirect('detalhar_evento', id=evento.id)
 
 @login_required
-def cancelar_inscricao(request, evento_id):
-    evento = get_object_or_404(Evento, id=evento_id)
-    if Participacao.objects.filter(evento=evento, usuario=request.user).exists():
-        evento.participantes.remove(request.user)
-        messages.success(request, f'Você cancelou sua inscrição no evento com sucesso. "{evento.titulo}".')
-
-    return redirect('detalhar_evento', evento_id=evento.id)
+def cancelar_inscricao(request, id):
+    evento = get_object_or_404(Evento, id=id)
+    participacao = Participacao.objects.get(usuario=request.user, evento=evento)
+    participacao.delete()  # Deletar a participação do usuário no evento
+    messages.success(request, f'Você foi desinscrito do evento: {evento.titulo}')
+    return redirect('detalhar_evento', id=evento.id)
