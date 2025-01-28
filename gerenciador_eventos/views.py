@@ -83,6 +83,7 @@ def listar_eventos(request):
     eventos = Evento.objects.all()
     return render(request, 'listar_eventos.html', {'eventos': eventos})
 
+@login_required
 def detalhar_evento(request, id):
     evento = get_object_or_404(Evento, id=id)
     usuario_inscrito = evento.participantes.filter(usuario=request.user).exists()
