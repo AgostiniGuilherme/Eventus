@@ -68,8 +68,12 @@ def criar_evento(request):
             evento = form.save(commit=False)
             evento.organizador = request.user  # Define o usuário logado como organizador
             evento.save()
+
+            # Adiciona automaticamente o organizador como participante
+            Participacao.objects.create(usuario=request.user, evento=evento, eh_organizador=True)
+            
             messages.success(request, 'Evento criado com sucesso!')
-            return redirect('meus_eventos')  # Redirecione para a lista de eventos do usuário
+            return redirect('meus_eventos') 
     else:
         form = EventoForm()
     

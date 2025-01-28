@@ -27,6 +27,20 @@
       </div>
     </div>
 
+    <!-- Lista os participantes -->
+    <div class="mt-4">
+      <h3>Participantes:</h3>
+      <ul>
+        {% for participacao in evento.participantes.all %}
+          <li>
+            {{ participacao.usuario.username }}{% if participacao.eh_organizador %} (Organizador){% endif %}
+          </li>
+        {% empty %}
+          <li>Não há participantes registrados ainda.</li>
+        {% endfor %}
+      </ul>
+    </div>
+
     <div class="mt-4 d-flex justify-content-between">
       <a href="{% url 'editar_evento' evento.id %}" class="btn btn-warning">Editar</a>
 
