@@ -36,7 +36,7 @@ class EventoForm(forms.ModelForm):
             'titulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Digite o título do evento'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Digite uma descrição para o evento', 'rows': 4}),
             'local': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Informe o local do evento'}),
-            'data': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'YYYY-MM-DDTHH:MM'}),
+            'data': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
         }
 
     def clean_data(self):
