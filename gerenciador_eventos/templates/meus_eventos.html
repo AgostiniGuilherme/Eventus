@@ -1,21 +1,27 @@
-{% extends "base.html" %} 
-{% load static %} 
+{% extends "base.html" %}
 
-{% block titulo %} 
-  Eventus - Meus Eventos 
-{% endblock %} 
+{% block titulo %}
+  Meus Eventos - Eventus
+{% endblock %}
 
 {% block conteudo %}
-  <div class="mycard">
-    <h1>Meus Eventos</h1>
-    <ul>
-      {% for evento in eventos %}
-      <li onclick="window.location = '/meus_eventos/detalhes/{{ evento.id }}'">
-        <em>Nome:</em> {{ evento.nome }} <br />
-        <em>Data:</em> {{ evento.data }} <br />
-        <em>Local:</em> {{ evento.local }}
-      </li>
-      {% endfor %}
-    </ul>
+  <div class="container mt-4">
+    <h1 class="text-center mb-4">Meus Eventos</h1>
+
+    {% if eventos %}
+      <ul class="list-group">
+        {% for evento in eventos %}
+          <li class="list-group-item">
+            <h5>{{ evento.titulo }}</h5>
+            <p><strong>Data:</strong> {{ evento.data }}</p>
+            <p><strong>Local:</strong> {{ evento.local }}</p>
+            <p><strong>Organizador:</strong> {{ evento.organizador.username }}</p>
+            <a href="{% url 'detalhar_evento' evento.id %}" class="btn btn-info">Ver detalhes</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-center">Você não está inscrito em nenhum evento ainda.</p>
+    {% endif %}
   </div>
 {% endblock %}
