@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Evento
+from .models import Evento, Participacao
 from .forms import EventoForm  # Certifique-se de ter um formulário para Evento
 
 def principal(request):
@@ -175,5 +175,27 @@ def deletar_evento(request, id):
     if request.method == 'POST':
         evento.delete()
         messages.success(request, 'Evento deletado com sucesso!')
-        return redirect('meus_eventos')  # Redirecione para a lista de eventos
+        return redirect('meus_eventos') 
     return render(request, 'deletar_evento.html', {'evento': evento})
+
+@login_required
+def inscricao_em_evento(request, evento_id):
+    evento = get_object_or_404(Evento, id=evento_id)
+
+    if not Participacao.objects.filter(evento=evento, usuario=request.user).exists():
+        # Se o usuário já estiver inscrito, não permita a inscrição
+        messages.info(request, 'Você já está inscrito neste evento.')
+        return redirect('detalhar_evento', id=evento.id)
+
+    Participacao.objects.create(evento=evento, usuario=request.user)
+    messages.success(request, 'Você se inscreveu com sucesso no evento!')
+    return redirect('detalhar_evento', id=evento.id)
+
+@login_required
+def cancelar_inscricao(request, evento_id):
+    evento = get_object_or_404(Evento, id=evento_id)
+    if Participacao.objects.filter(evento=evento, usuario=request.user).exists():
+        evento.participantes.remove(request.user)
+        messages.success(request, f'Você cancelou sua inscrição no evento com sucesso. "{evento.titulo}".')
+
+    return redirect('detalhar_evento', evento_id=evento.id)
