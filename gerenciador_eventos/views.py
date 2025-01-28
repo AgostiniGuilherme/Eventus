@@ -9,8 +9,7 @@ from .models import Evento, Participacao
 from .forms import EventoForm  
 
 def principal(request):
-    template = loader.get_template('principal.html')
-    return HttpResponse(template.render())
+    return render(request, 'principal.html')
 
 @login_required
 def meus_eventos(request):
