@@ -155,7 +155,7 @@ def detalhar_evento(request, id):
 
 #Update
 @login_required
-def atualizar_evento(request, id):
+def editar_evento(request, id):
     evento = get_object_or_404(Evento, id=id, organizador=request.user)
     if request.method == 'POST':
         form = EventoForm(request.POST, instance=evento)
@@ -166,7 +166,7 @@ def atualizar_evento(request, id):
     else:
         form = EventoForm(instance=evento)
     
-    return render(request, 'atualizar_evento.html', {'form': form, 'evento': evento})
+    return render(request, 'editar_evento.html', {'form': form, 'evento': evento})
 
 #Delete
 @login_required

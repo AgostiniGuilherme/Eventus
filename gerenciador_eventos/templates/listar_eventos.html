@@ -1,19 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Eventos</title>
-</head>
-<body>
-    <h1>Eventos Disponíveis</h1>
-    <a href="{% url 'criar_evento' %}">Criar Novo Evento</a>
-    <ul>
-        {% for evento in eventos %}
-        <li>
-            <a href="{% url 'detalhar_evento' evento.id %}">{{ evento.titulo }}</a> - {{ evento.local }} em {{ evento.data }}
-        </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block titulo %}
+  Lista de Eventos - Eventus
+{% endblock %}
+
+{% block conteudo %}
+  <div class="container mt-4">
+    <h1 class="text-center mb-4">Eventos Disponíveis</h1>
+
+    <div class="text-center mb-4">
+      <a href="{% url 'criar_evento' %}" class="btn btn-primary">Criar Novo Evento</a>
+    </div>
+
+    <div class="list-group">
+      {% for evento in eventos %}
+        <a href="{% url 'detalhar_evento' evento.id %}" class="list-group-item list-group-item-action">
+          <h5 class="mb-1">{{ evento.titulo }}</h5>
+          <p class="mb-1">{{ evento.local }} em {{ evento.data }}</p>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
