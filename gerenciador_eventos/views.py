@@ -92,7 +92,12 @@ def detalhar_evento(request, id):
 #Update
 @login_required
 def editar_evento(request, id):
-    evento = get_object_or_404(Evento, id=id, organizador=request.user)
+    evento = get_object_or_404(Evento, id=id)
+
+    if evento.organizador != request.user:
+        messages.error(request, 'Você não tem permissão para editar este evento.')
+        return redirect('detalhar_evento', id=evento.id)
+
     if request.method == 'POST':
         form = EventoForm(request.POST, instance=evento)
         if form.is_valid():
