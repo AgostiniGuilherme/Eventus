@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+from django.utils import timezone
 from .models import Evento
 
 
@@ -41,8 +42,12 @@ class EventoForm(forms.ModelForm):
 
     def clean_data(self):
         data = self.cleaned_data.get('data')
+
         if data is None:
             raise forms.ValidationError("Por favor, informe uma data válida para o evento.")
+        
+        if data < timezone.now():
+            raise forms.ValidationError("A data do evento não pode ser no passado.")
+        
         return data
-
-  
+    
