@@ -5,16 +5,6 @@
 {% endblock %}
 
 {% block conteudo %}
-  {% if messages %}
-  <div class="container mt-4">
-    <div class="alert alert-info">
-      {% for message in messages %}
-        <p>{{ message }}</p>
-      {% endfor %}
-    </div>
-  </div>
-  {% endif %}
-  
   <div class="container mt-4">
     <h1 class="text-center mb-4">{{ evento.titulo }}</h1>
 
@@ -42,18 +32,22 @@
     </div>
 
     <div class="mt-4 d-flex justify-content-between">
-      <a href="{% url 'editar_evento' evento.id %}" class="btn btn-warning">Editar</a>
+      {% if request.user == evento.organizador %}
+        <a href="{% url 'editar_evento' evento.id %}" class="btn btn-warning">Editar</a>
 
-      {% if not usuario_inscrito %}
-      <a href="{% url 'inscricao_em_evento' evento.id %}" class="btn btn-success">Inscrever-se</a>
-    {% else %}
-      <a href="{% url 'cancelar_inscricao' evento.id %}" class="btn btn-danger">Desinscrever-se</a>
-    {% endif %}
-
-      <form method="POST" action="{% url 'deletar_evento' evento.id %}" style="display:inline;">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Excluir</button>
-      </form>
+        <form method="POST" action="{% url 'deletar_evento' evento.id %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+      {% endif %}
+      
+      {% if request.user != evento.organizador %}
+        {% if not usuario_inscrito %}
+          <a href="{% url 'inscricao_em_evento' evento.id %}" class="btn btn-success">Inscrever-se</a>
+        {% else %}
+          <a href="{% url 'cancelar_inscricao' evento.id %}" class="btn btn-danger">Desinscrever-se</a>
+        {% endif %}
+      {% endif %}
     </div>
 
     <div class="mt-3 text-center">
