@@ -127,3 +127,20 @@ def cancelar_inscricao(request, id):
     participacao.delete()  # Deletar a participação do usuário no evento
     messages.success(request, f'Você foi desinscrito do evento: {evento.titulo}')
     return redirect('detalhar_evento', id=evento.id)
+
+@login_required
+def remover_participante(request, evento_id, usuario_id):
+    evento = get_object_or_404(Evento, id=evento_id)
+    participacao = get_object_or_404(Participacao, evento=evento, usuario_id=usuario_id)
+
+    # Somente o organizador pode remover participantes, e ele não pode remover a si mesmo
+    if request.user == evento.organizador:
+        if participacao.usuario == request.user:
+            messages.error(request, "Você não pode se remover do próprio evento.")
+        else:
+            participacao.delete()
+            messages.success(request, "Participante removido com sucesso.")
+    else:
+        messages.error(request, "Você não tem permissão para remover participantes.")
+
+    return redirect('detalhar_evento', id=evento.id)

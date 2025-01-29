@@ -23,7 +23,19 @@
       <ul>
         {% for participacao in evento.participantes.all %}
           <li>
-            {{ participacao.usuario.username }}{% if participacao.eh_organizador %} (Organizador){% endif %}
+
+            {{ participacao.usuario.username }}
+            {% if participacao.eh_organizador %} 
+              (Organizador)
+            {% endif %}
+
+            {% if request.user == evento.organizador and participacao.usuario != request.user %}
+              <form method="POST" action="{% url 'remover_participante' evento.id participacao.usuario.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-danger">Remover</button>
+              </form>
+            {% endif %}
+
           </li>
         {% empty %}
           <li>Não há participantes registrados ainda.</li>
