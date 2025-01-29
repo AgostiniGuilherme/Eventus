@@ -25,26 +25,30 @@ Eventus/
 │-- eventus/
 │   │-- settings.py
 │   │-- urls.py
+│-- gerenciador_eventos/
+│   │-- urls.py
 │   │-- views.py
 │   │-- models.py
 │   │-- forms.py
-│-- templates/
-│   │-- principal.html
-│   │-- login.html
-│   │-- cadastrar.html
-│   │-- meus_eventos.html
-│   │-- listar_eventos.html
-│   │-- detalhar_evento.html
-│   │-- criar_evento.html
-│   │-- editar_evento.html
-│   │-- deletar_evento.html
+|   |-- admin.py
+|   |-- apps.py
+|   │-- templates/
+│   │   |-- principal.html
+│   │   |-- login.html
+│   │   |-- cadastrar.html
+│   │   |-- meus_eventos.html
+│   │   |-- listar_eventos.html
+│   │   |-- detalhar_evento.html
+│   │   |-- criar_evento.html
+│   │   |-- editar_evento.html
+│   │   |-- deletar_evento.html
 ```
 
 ## 📌 Como Rodar o Projeto
 
 ### 1️⃣ Clonar o repositório
 ```bash
-git clone https://github.com/seu-usuario/Eventus.git
+git clone https://github.com/AgostiniGuilherme/Eventus.git
 cd eventus
 ```
 
