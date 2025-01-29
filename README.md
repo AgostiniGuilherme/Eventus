@@ -1,6 +1,6 @@
-# Eventus
+# Eventus 
 
-Eventus é um sistema web desenvolvido em Django para gerenciamento de eventos. O sistema permite a criação, edição, listagem e exclusão de eventos, além de funcionalidades de autenticação e participação dos usuários.
+Eventus é um sistema web desenvolvido com Django para gerenciamento de eventos. Com uma interface intuitiva, ele permite que os usuários criem, editem, visualizem e excluam eventos, além de se inscreverem e gerenciarem suas participações. O sistema também conta com um mecanismo de autenticação para garantir que apenas organizadores possam modificar e excluir seus eventos.
 
 ## 📌 Funcionalidades
 
@@ -14,7 +14,7 @@ Eventus é um sistema web desenvolvido em Django para gerenciamento de eventos. 
 
 - **Django** (Back-end)
 - **Django Authentication** (Autenticação de usuários)
-- **HTML + CSS + Bootstrap** (Front-end básico)
+- **HTML + CSS + Bootstrap** (Front-end)
 - **SQLite** (Banco de dados padrão do Django)
 
 
@@ -46,9 +46,31 @@ Eventus/
 │   │   |-- deletar_evento.html
 ```
 
+
 ### 📊 Modelo do Banco de Dados  
 
 ![BD Eventus](imagens/eventus.png)
+
+---
+
+## 🔗 **Rotas e Endpoints**
+
+| Rota | Método | Descrição |
+|------|--------|-------------|
+| `/` | GET | Página principal |
+| `/auth/cadastrar/` | POST | Cadastro de usuário |
+| `/auth/login/` | POST | Login de usuário |
+| `/auth/logout/` | GET | Logout do sistema |
+| `/meus-eventos/` | GET | Lista eventos que o usuário participa |
+| `/eventos/` | GET | Lista todos os eventos |
+| `/eventos/criar/` | POST | Criar um novo evento |
+| `/eventos/<id>/` | GET | Detalhes de um evento |
+| `/eventos/<id>/editar/` | PUT | Editar um evento |
+| `/eventos/<id>/deletar/` | DELETE | Deletar um evento |
+| `/evento/<id>/inscrever/` | POST | Inscrever-se em um evento |
+| `/evento/<id>/cancelar-inscricao/` | DELETE | Cancelar inscrição |
+
+---
 
 ## 📌 Como Rodar o Projeto
 
@@ -85,23 +107,6 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 Acesse no navegador: [http://127.0.0.1:8000](http://127.0.0.1:8000)
-
-## 📌 Rotas Principais
-
-| Rota | Descrição |
-|------|-------------|
-| `/` | Página principal |
-| `/auth/cadastrar/` | Cadastro de usuário |
-| `/auth/login/` | Login de usuário |
-| `/auth/logout/` | Logout do sistema |
-| `/meus-eventos/` | Lista eventos que o usuário participa |
-| `/eventos/` | Lista todos os eventos disponíveis |
-| `/eventos/criar/` | Criar um novo evento |
-| `/eventos/<id>/` | Detalhes de um evento específico |
-| `/eventos/<id>/editar/` | Editar um evento (somente organizador) |
-| `/eventos/<id>/deletar/` | Deletar um evento (somente organizador) |
-| `/evento/<id>/inscrever/` | Inscrever-se em um evento |
-| `/evento/<id>/cancelar-inscricao/` | Cancelar inscrição em um evento |
 
 ## 🛠 Como Contribuir
 1. **Fork** este repositório
