@@ -16,8 +16,7 @@
         <p><strong>Organizador:</strong> {{ evento.organizador.username }}</p>
       </div>
     </div>
-
-    <!-- Lista os participantes -->
+    
     <div class="mt-4">
       <h3>Participantes:</h3>
       <ul>
@@ -54,11 +53,19 @@
       {% endif %}
       
       {% if request.user != evento.organizador %}
-        {% if not usuario_inscrito %}
-          <a href="{% url 'inscricao_em_evento' evento.id %}" class="btn btn-success">Inscrever-se</a>
+
+        {% if request.user in evento.usuarios_removidos.all %}
+          <p class="text-danger">Você foi removido deste evento e não pode mais se inscrever.</p>
         {% else %}
-          <a href="{% url 'cancelar_inscricao' evento.id %}" class="btn btn-danger">Desinscrever-se</a>
+
+          {% if not usuario_inscrito %}
+            <a href="{% url 'inscricao_em_evento' evento.id %}" class="btn btn-success">Inscrever-se</a>
+          {% else %}
+            <a href="{% url 'cancelar_inscricao' evento.id %}" class="btn btn-danger">Desinscrever-se</a>
+          {% endif %}
+
         {% endif %}
+
       {% endif %}
     </div>
 

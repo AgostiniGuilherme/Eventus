@@ -7,6 +7,7 @@ class Evento(models.Model):
   local = models.CharField(max_length=255)
   data = models.DateTimeField()
   organizador = models.ForeignKey(User, related_name='eventos_criados', on_delete=models.CASCADE)
+  usuarios_removidos = models.ManyToManyField(User, related_name="eventos_bloqueados", blank=True)
 
   def __str__(self):
     return self.titulo

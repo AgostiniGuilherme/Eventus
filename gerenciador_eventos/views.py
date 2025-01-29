@@ -33,8 +33,7 @@ def logar(request):
         if form.is_valid():
             username_or_email = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            
-            # Autentica o usuário usando o nome de usuário obtido (que pode ser um email)
+
             user = authenticate(request, username=username_or_email, password=password)
             
             if user is not None:
@@ -62,10 +61,9 @@ def criar_evento(request):
         form = EventoForm(request.POST)
         if form.is_valid():
             evento = form.save(commit=False)
-            evento.organizador = request.user  # Define o usuário logado como organizador
+            evento.organizador = request.user
             evento.save()
 
-            # Adiciona automaticamente o organizador como participante
             Participacao.objects.create(usuario=request.user, evento=evento, eh_organizador=True)
 
             messages.success(request, 'Evento criado com sucesso!')
@@ -116,6 +114,10 @@ def deletar_evento(request, id):
 def inscricao_em_evento(request, id):
     evento = get_object_or_404(Evento, id=id)
 
+    if request.user in evento.usuarios_removidos.all():
+        messages.error(request, "Você não pode se inscrever neste evento pois foi removido pelo organizador.")
+        return redirect('detalhar_evento', id=evento.id)
+
     Participacao.objects.create(usuario=request.user, evento=evento, eh_organizador=False)
     messages.success(request, 'Você foi inscrito no evento com sucesso!')
     return redirect('detalhar_evento', id=evento.id)
@@ -124,7 +126,7 @@ def inscricao_em_evento(request, id):
 def cancelar_inscricao(request, id):
     evento = get_object_or_404(Evento, id=id)
     participacao = Participacao.objects.get(usuario=request.user, evento=evento)
-    participacao.delete()  # Deletar a participação do usuário no evento
+    participacao.delete()
     messages.success(request, f'Você foi desinscrito do evento: {evento.titulo}')
     return redirect('detalhar_evento', id=evento.id)
 
@@ -133,11 +135,11 @@ def remover_participante(request, evento_id, usuario_id):
     evento = get_object_or_404(Evento, id=evento_id)
     participacao = get_object_or_404(Participacao, evento=evento, usuario_id=usuario_id)
 
-    # Somente o organizador pode remover participantes, e ele não pode remover a si mesmo
     if request.user == evento.organizador:
         if participacao.usuario == request.user:
             messages.error(request, "Você não pode se remover do próprio evento.")
         else:
+            evento.usuarios_removidos.add(participacao.usuario)
             participacao.delete()
             messages.success(request, "Participante removido com sucesso.")
     else:
