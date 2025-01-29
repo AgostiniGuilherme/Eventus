@@ -1,106 +1,106 @@
-# **Guia para Configuração do Projeto**
+# Eventus
 
-Este tutorial irá guiá-lo para configurar e executar o projeto em sua máquina local.
+Eventus é um sistema web desenvolvido em Django para gerenciamento de eventos. O sistema permite a criação, edição, listagem e exclusão de eventos, além de funcionalidades de autenticação e participação dos usuários.
 
----
+## 📌 Funcionalidades
 
-## **Visão Geral do Projeto**
+- 🔹 **Autenticação de Usuário** (Login, Logout e Cadastro)
+- 🔹 **CRUD de Eventos** (Criar, Listar, Editar e Deletar eventos)
+- 🔹 **Gerenciamento de Participação** (Inscrição, Lista e Cancelamento de Inscrição em eventos)
+- 🔹 **Sistema de Mensagens** para feedback ao usuário
+- 🔹 **Proteção de Rotas** (Somente organizadores podem editar/deletar seus eventos)
 
-![BD Eventus](imagens/eventus.png)
+## 🚀 Tecnologias Utilizadas
 
-Eventus é uma plataforma de gerenciamento de eventos desenvolvida como parte de um projeto acadêmico para a disciplina de Programação Web da UFLA. O sistema permite a divulgação de eventos, o cadastro de usuários e a administração eficiente de eventos e participantes, oferecendo também um painel administrativo completo para facilitar o gerenciamento de toda a plataforma.
+- **Django** (Back-end)
+- **Django Authentication** (Autenticação de usuários)
+- **HTML + CSS + Bootstrap** (Front-end básico)
+- **SQLite** (Banco de dados padrão do Django)
 
----
+## 📂 Estrutura do Projeto
 
-## **1. Pré-requisitos**
-
-- **Python** (versão 3.10 ou superior): [Download Python](https://www.python.org/downloads/)
-- **Git** (para clonar o repositório): [Download Git](https://git-scm.com/)
-
----
-
-## **2. Clonar o Repositório**
-
-Faça o clone do repositório do projeto em sua máquina local.
-```bash
-git clone https://github.com/AgostiniGuilherme/Eventus.git
-   ```
-
-## **3. Criar um Ambiente Virtual**
-
-Crie e ative um ambiente virtual para o projeto:
-
-### **No Windows**:
-1. Crie o ambiente virtual:
-   ```bash
-   python -m venv venv
-   ```
-
-2. Ative o ambiente virtual:
-   ```bash
-   Set-ExecutionPolicy Unrestricted -Scope Process
-   venv\Scripts\activate
-   ```
-
-   Ou:
-    ```bash
-   venv\Scripts\Activate.ps1  
-   ```
-
-
-## **4. Instalar Dependências**
-
-Com o ambiente virtual ativado, instale o Django:
-
-```bash
-pip install Django
+```
+Eventus/
+│-- manage.py
+│-- eventus/
+│   │-- settings.py
+│   │-- urls.py
+│   │-- views.py
+│   │-- models.py
+│   │-- forms.py
+│-- templates/
+│   │-- principal.html
+│   │-- login.html
+│   │-- cadastrar.html
+│   │-- meus_eventos.html
+│   │-- listar_eventos.html
+│   │-- detalhar_evento.html
+│   │-- criar_evento.html
+│   │-- editar_evento.html
+│   │-- deletar_evento.html
 ```
 
----
+## 📌 Como Rodar o Projeto
 
-## **5. Configurar o Banco de Dados**
+### 1️⃣ Clonar o repositório
+```bash
+git clone https://github.com/seu-usuario/Eventus.git
+cd eventus
+```
 
-Execute as migrações para configurar o banco de dados:
+### 2️⃣ Criar e ativar um ambiente virtual (opcional, mas recomendado)
+```bash
+python -m venv venv
+source venv/bin/activate  # Mac/Linux
+venv\Scripts\activate     # Windows
+```
 
+### 3️⃣ Instalar as dependências
+```bash
+pip install -r requirements.txt
+```
+
+### 4️⃣ Configurar o banco de dados
 ```bash
 python manage.py migrate
 ```
 
----
-
-## **6. Criar um Superusuário**
-
-Se desejar acessar o painel administrativo do Django, crie um superusuário:
-
+### 5️⃣ Criar um superusuário (opcional, mas útil para testes)
 ```bash
 python manage.py createsuperuser
 ```
 
-Siga as instruções fornecidas no terminal para definir o nome de usuário, email e senha.
-
----
-
-## **7. Rodar o Servidor Local**
-
-Execute o servidor de desenvolvimento do Django para testar o projeto:
-
+### 6️⃣ Rodar o servidor
 ```bash
 python manage.py runserver
 ```
+Acesse no navegador: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-Acesse o projeto no navegador no seguinte endereço:
-```
-http://127.0.0.1:8000/
-```
+## 📌 Rotas Principais
+
+| Rota | Descrição |
+|------|-------------|
+| `/` | Página principal |
+| `/auth/cadastrar/` | Cadastro de usuário |
+| `/auth/login/` | Login de usuário |
+| `/auth/logout/` | Logout do sistema |
+| `/meus-eventos/` | Lista eventos que o usuário participa |
+| `/eventos/` | Lista todos os eventos disponíveis |
+| `/eventos/criar/` | Criar um novo evento |
+| `/eventos/<id>/` | Detalhes de um evento específico |
+| `/eventos/<id>/editar/` | Editar um evento (somente organizador) |
+| `/eventos/<id>/deletar/` | Deletar um evento (somente organizador) |
+| `/evento/<id>/inscrever/` | Inscrever-se em um evento |
+| `/evento/<id>/cancelar-inscricao/` | Cancelar inscrição em um evento |
+
+## 🛠 Como Contribuir
+1. **Fork** este repositório
+2. Crie uma nova branch: `git checkout -b minha-feature`
+3. Faça as alterações e commit: `git commit -m 'Adicionando nova feature'`
+4. Envie para o repositório remoto: `git push origin minha-feature`
+5. Abra um **Pull Request** 🚀
 
 ---
-
-## **10. Finalização**
-
-Parabéns! O projeto está configurado e rodando em sua máquina. Agora você pode começar a utilizá-lo ou desenvolvê-lo.
-
----
+💡 **Eventus** - Sistema de gerenciamento de eventos desenvolvido em Django. 
 
 © Projeto desenvolvido por Guilherme Noronha de Agostini e Gustavo Viana Avelar Dutra para a disciplina Programação Web, realizada na UFLA - Universidade Federal de Lavras.
-
----
