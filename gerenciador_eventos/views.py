@@ -1,6 +1,4 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse
-from django.template import loader
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.contrib import messages
@@ -15,7 +13,6 @@ def principal(request):
 def meus_eventos(request):
     participacoes = Participacao.objects.filter(usuario=request.user)
     
-    # Extrair os eventos a partir das participações
     eventos = [participacao.evento for participacao in participacoes]
     return render(request, 'meus_eventos.html', {'eventos': eventos})
 

@@ -1,5 +1,4 @@
 from django.urls import path
-from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
@@ -15,5 +14,4 @@ urlpatterns = [
     path('eventos/<int:id>/deletar/', views.deletar_evento, name='deletar_evento'),
     path('evento/<int:id>/inscrever/', views.inscricao_em_evento, name='inscricao_em_evento'),
     path('evento/<int:id>/cancelar-inscricao/', views.cancelar_inscricao, name='cancelar_inscricao'),
-    #path('evento/<int:evento_id>/inscritos/', views.listar_inscritos, name='listar_inscritos')
 ]
