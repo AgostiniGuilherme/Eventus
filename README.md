@@ -17,9 +17,7 @@ Eventus é um sistema web desenvolvido em Django para gerenciamento de eventos. 
 - **HTML + CSS + Bootstrap** (Front-end básico)
 - **SQLite** (Banco de dados padrão do Django)
 
-## 📊 Modelo do Banco de Dados  
 
-![BD Eventus](imagens/eventus.png)
 
 ## 📂 Estrutura do Projeto
 
@@ -47,6 +45,10 @@ Eventus/
 │   │   |-- editar_evento.html
 │   │   |-- deletar_evento.html
 ```
+
+### 📊 Modelo do Banco de Dados  
+
+![BD Eventus](imagens/eventus.png)
 
 ## 📌 Como Rodar o Projeto
 
